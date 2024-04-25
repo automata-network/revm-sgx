@@ -184,7 +184,6 @@ pub extern "C" fn run_server() -> SgxStatus {
     };
     // let s = r#"{"a": {"env": {"address":"0xa00000000000000000000000000000000000000a"}}}"#;
 
-    println!("!!!!!!!!!!!! IN ENCLAVE !!!!!!!!!!!!!!!");
     let _json: TestSuite = match serde_json::from_str(s) {
         Ok(v) => v,
         Err(e) => {
@@ -192,8 +191,6 @@ pub extern "C" fn run_server() -> SgxStatus {
             return SgxStatus::Unexpected;
         }
     };
-    println!("parse config: {:?}", _json);
-
 
     let cmd = match Cmd::from_args_safe() {
         Ok(v) => v,

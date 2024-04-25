@@ -217,7 +217,6 @@ pub fn execute_test_suite(
 
 
     let s = std::fs::read_to_string(path).unwrap();
-    println!("parse json");
     let suite: TestSuite = serde_json::from_str(&s).map_err(|e| {
         println!("{e}");
         TestError {
@@ -226,12 +225,8 @@ pub fn execute_test_suite(
         }
     })?;
 
-    println!("begin suite({})", suite.0.len());
     for (name, unit) in suite.0 {
         // Create database and insert cache
-        println!("begin {name}");
-        println!("build cache");
-
         let mut cache_state = revm::CacheState::new(false);
         for (address, info) in unit.pre {
             let acc_info = revm::primitives::AccountInfo {
@@ -244,7 +239,6 @@ pub fn execute_test_suite(
             cache_state.insert_account_with_storage(address, acc_info, h);
         }
 
-        println!("build env");
         let mut env = Box::<Env>::default();
         // for mainnet
         env.cfg.chain_id = 1;
@@ -349,7 +343,6 @@ pub fn execute_test_suite(
                     .with_cached_prestate(cache)
                     .with_bundle_update()
                     .build();
-                println!("build evm");
                 let mut evm = Evm::builder()
                     .with_db(&mut state)
                     .modify_env(|e| *e = env.clone())
@@ -357,7 +350,6 @@ pub fn execute_test_suite(
                     .build();
 
                 // do the deed
-                println!("transact");
                 let (e, exec_result) = {
                     let timer = Instant::now();
                     let res = evm.transact_commit();
@@ -449,8 +441,6 @@ pub fn run(
         (true, _) | (false, Err(_)) => 1,
         (false, Ok(n)) => n.get(),
     };
-    println!("available_parallelism={num_threads}, n_files={n_files}");
-
     
     let num_threads = num_threads.min(n_files);
     let mut handles = Vec::with_capacity(num_threads);
