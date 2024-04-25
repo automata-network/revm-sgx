@@ -18,7 +18,7 @@
 [package]
 name = "server"
 version = "1.0.0"
-authors = ["The Teaclave Authors"]
+authors = ["Automata Network"]
 edition = "2021"
 
 [dependencies]
