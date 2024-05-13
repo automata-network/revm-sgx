@@ -33,14 +33,15 @@ sgx_types = { path = "../incubator-teaclave-sgx-sdk/sgx_types" }
 sgx_libc = { path = "../incubator-teaclave-sgx-sdk/sgx_libc" }
 structopt = "0.3"
 thiserror = "1.0"
-serde = { version = "1", features = ["derive"] }
+serde = { version = "=1.0.197", features = ["derive"] }
 serde_json = { version = "1" }
 tokio = { version = "1.0", features = ["macros", "net", "rt-multi-thread"] }
-revm = { git = "https://github.com/automata-network/revm.git", branch = "v35-sgx", default-features = false, features = [
-    "serde-json", "std", "ethersdb",
+revm = { version = "8.0.0", default-features = false, features = [
+    "serde-json",
+    "std",
+    "ethersdb",
     "c-kzg",
     "secp256k1",
-    "portable",
 ] }
 alloy-rlp = { version = "0.3", default-features = false, features = [
     "arrayvec",
@@ -55,3 +56,6 @@ k256 = { version = "0.13.3", features = ["ecdsa"] }
 
 [target.'cfg(not(target_vendor = "teaclave"))'.dependencies]
 sgx_types = { path = "../incubator-teaclave-sgx-sdk/sgx_types" }
+
+[patch.crates-io]
+blst = { path = "../blst/bindings/rust" }
