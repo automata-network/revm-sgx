@@ -15,21 +15,23 @@
 // specific language governing permissions and limitations
 // under the License..
 
-extern crate sgx_types;
-extern crate sgx_urts;
+use automata_sgx_builder::sgxlib::{sgx_types, sgx_urts};
 
+use std::path::PathBuf;
 use sgx_types::error::SgxStatus;
 use sgx_types::types::*;
 use sgx_urts::enclave::SgxEnclave;
 
-static ENCLAVE_FILE: &str = "enclave.signed.so";
+static ENCLAVE_FILE: &str = "libenclave.signed.so";
 
 extern "C" {
     fn run_server(eid: EnclaveId, retval: *mut SgxStatus) -> SgxStatus;
 }
 
 fn main() {
-    let enclave = match SgxEnclave::create(ENCLAVE_FILE, true) {
+    let args = std::env::args().collect::<Vec<_>>();
+    let enclave_path = PathBuf::new().join(&args[0]).parent().unwrap().join(ENCLAVE_FILE);
+    let enclave = match SgxEnclave::create(enclave_path, true) {
         Ok(enclave) => {
             println!("[+] Init Enclave Successful {}!", enclave.eid());
             enclave

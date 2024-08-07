@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = ["bin/*", "crates/*"]
+
+[workspace.package]
+edition = "2021"
+version = "0.1.0"
+authors = ["Automata Team"]
+homepage = "https://www.ata.network/"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[workspace.dependencies]
+serde = { version = "=1.0.197", features = ["derive"] }
+serde_json = { version = "1" }
+automata-sgx-builder = { git = "https://github.com/automata-network/automata-sgx-builder", branch = "main" }
+blst = { version = "=0.3.11" }
+
+[patch.crates-io]
+blst = { git = "https://github.com/automata-network/blst", rev = "2ec67be" }

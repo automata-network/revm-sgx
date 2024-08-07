@@ -23,10 +23,8 @@ To run [ethereum tests](https://github.com/ethereum/tests) locally, clone the [t
 $ git clone https://github.com/ethereum/tests.git
 $ git clone https://github.com/automata-network/revm-sgx.git
 $ cd revm-sgx
-$ git submodule update --init --recursive
-$ make
-$ cd bin
-$ ./server ../../tests/GeneralStateTests/Cancun/*
+$ # cargo install cargo-sgx
+$ cargo sgx run ../tests/GeneralStateTests/Cancun/*
 ```
 
 ## How it works
