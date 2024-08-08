@@ -290,13 +290,19 @@ checksum = "0c4b4d0bd25bd0b74681c0ad21497610ce1b7c91b1022cd21c80c6fbdd9476b0"
 [[package]]
 name = "automata-sgx-builder"
 version = "0.1.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 dependencies = [
+ "automata-sgx-builder-sysroot",
  "cc",
+ "serde",
+ "serde_json",
  "sgx_libc",
  "sgx_types",
  "sgx_urts",
 ]
+
+[[package]]
+name = "automata-sgx-builder-sysroot"
+version = "0.1.0"
 
 [[package]]
 name = "backtrace"
@@ -2388,12 +2394,10 @@ dependencies = [
 [[package]]
 name = "sgx_build_helper"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 
 [[package]]
 name = "sgx_crypto_sys"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 dependencies = [
  "sgx_build_helper",
  "sgx_download_prebuilt",
@@ -2403,7 +2407,6 @@ dependencies = [
 [[package]]
 name = "sgx_download_prebuilt"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 dependencies = [
  "sgx_build_helper",
 ]
@@ -2411,7 +2414,6 @@ dependencies = [
 [[package]]
 name = "sgx_ffi"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 dependencies = [
  "sgx_types",
 ]
@@ -2419,7 +2421,6 @@ dependencies = [
 [[package]]
 name = "sgx_libc"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 dependencies = [
  "sgx_ffi",
  "sgx_oc",
@@ -2432,7 +2433,6 @@ dependencies = [
 [[package]]
 name = "sgx_oc"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 dependencies = [
  "sgx_ffi",
  "sgx_sync",
@@ -2443,7 +2443,6 @@ dependencies = [
 [[package]]
 name = "sgx_sync"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 dependencies = [
  "sgx_trts",
  "sgx_types",
@@ -2452,7 +2451,6 @@ dependencies = [
 [[package]]
 name = "sgx_tlibc_sys"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 dependencies = [
  "sgx_build_helper",
  "sgx_download_prebuilt",
@@ -2462,7 +2460,6 @@ dependencies = [
 [[package]]
 name = "sgx_trts"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 dependencies = [
  "sgx_crypto_sys",
  "sgx_tlibc_sys",
@@ -2472,12 +2469,10 @@ dependencies = [
 [[package]]
 name = "sgx_types"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 
 [[package]]
 name = "sgx_uprotected_fs"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 dependencies = [
  "libc",
  "sgx_types",
@@ -2486,7 +2481,6 @@ dependencies = [
 [[package]]
 name = "sgx_urts"
 version = "2.0.0"
-source = "git+https://github.com/automata-network/automata-sgx-builder?branch=main#81341002af8804440863efb81c56d3f1b5c12cf6"
 dependencies = [
  "libc",
  "sgx_types",

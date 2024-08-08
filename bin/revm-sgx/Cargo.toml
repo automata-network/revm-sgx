@@ -4,11 +4,7 @@ version.workspace = true
 edition.workspace = true
 
 [package.metadata.sgx]
-config = "sgx/config.xml"
-edl = "sgx/enclave.edl"
-lds = "sgx/enclave.lds"
-key = "sgx/private.pem"
-enclave = "../../crates/revm-runner"
+revm_runner = { path = "../../crates/revm-runner", config = "sgx/revm-runner.xml", edl = "sgx/revm-runner.edl", lds = "sgx/revm-runner.lds", key = "sgx/private.pem" }
 
 [dependencies]
 serde.workspace = true
