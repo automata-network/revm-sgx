@@ -22,7 +22,7 @@ use sgx_types::error::SgxStatus;
 use sgx_types::types::*;
 use sgx_urts::enclave::SgxEnclave;
 
-static ENCLAVE_FILE: &str = "libenclave.signed.so";
+static ENCLAVE_FILE: &str = "librevm_runner.signed.so";
 
 extern "C" {
     fn run_server(eid: EnclaveId, retval: *mut SgxStatus) -> SgxStatus;
