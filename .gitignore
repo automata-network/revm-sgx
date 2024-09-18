@@ -14,8 +14,6 @@ target/
 *.pdb
 .Ds_Store
 
-enclave/enclave_t.*
-app/enclave_u.*
-/bin/
-/lib
-/sysroot
+# Added by cargo
+
+/target

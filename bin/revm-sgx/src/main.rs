@@ -15,23 +15,19 @@
 // specific language governing permissions and limitations
 // under the License..
 
-use std::env;
+use automata_sgx_sdk::types::SgxStatus;
+
+automata_sgx_sdk::enclave! {
+    name: RevmRunner,
+    ecall: {
+        fn run_server() -> SgxStatus;
+    }
+}
 
 fn main() {
-    println!("cargo:rerun-if-env-changed=SGX_MODE");
-    println!("cargo:rerun-if-changed=build.rs");
-
-    let sdk_dir = env::var("SGX_SDK").unwrap_or_else(|_| "/opt/intel/sgxsdk".to_string());
-    let mode = env::var("SGX_MODE").unwrap_or_else(|_| "HW".to_string());
-
-    println!("cargo:rustc-link-search=native=../lib");
-    println!("cargo:rustc-link-lib=static=enclave_u");
-
-    println!("cargo:rustc-link-search=native={}/lib64", sdk_dir);
-    match mode.as_ref() {
-        "SIM" | "SW" => println!("cargo:rustc-link-lib=dylib=sgx_urts_sim"),
-        "HYPER" => println!("cargo:rustc-link-lib=dylib=sgx_urts_hyper"),
-        "HW" => println!("cargo:rustc-link-lib=dylib=sgx_urts"),
-        _ => println!("cargo:rustc-link-lib=dylib=sgx_urts"),
+    let result = RevmRunner::new().run_server().unwrap();
+    match result {
+        SgxStatus::Success => println!("[+] ECall Success..."),
+        _ => println!("[-] ECall Enclave Failed {}!", result.as_str()),
     }
 }
