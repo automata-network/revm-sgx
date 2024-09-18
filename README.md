@@ -1,15 +1,27 @@
-# revm-sgx
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/automata-network/automata-brand-kit/main/PNG/ATA_White%20Text%20with%20Color%20Logo.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/automata-network/automata-brand-kit/main/PNG/ATA_Black%20Text%20with%20Color%20Logo.png">
+    <img src="https://raw.githubusercontent.com/automata-network/automata-brand-kit/main/PNG/ATA_White%20Text%20with%20Color%20Logo.png" width="50%">
+  </picture>
+</div>
 
-This encalve app is the SGX version of the Rust EVM executor or short REVME. The official standard version can be found [here](https://github.com/automata-network/revm/tree/main/bins/revme). Presently, its primary application is in executing Ethereum tests.
+# revm-sgx
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE) [![Automata SGX SDK](https://img.shields.io/badge/Power%20By-Automata%20SGX%20SDK-orange.svg)](https://github.com/automata-network/automata-sgx-sdk)
+
+This encalve app is the SGX version of the Rust EVM executor or short REVME. The official standard version can be found [here](https://github.com/bluealloy/revm/tree/main/bins/revme). Presently, its primary application is in executing Ethereum tests.
 
 ## Prerequisite
-* SGX-SDK 2.17.1 installation
-* Cargo and Rust installation, currently teaclave-sgx-sdk requires nightly-2023-11-17 rustc version
+* SGX-SDK 2.24 installation
+* Cargo and Rust installation, currently requires `nightly-2024-02-01` rustc version
 * Basic dev toolkits installation like cmake
+* For setup the environment, refers to [Dockerfile](https://github.com/automata-network/automata-sgx-sdk/blob/main/docker/ubuntu-20.04.Dockerfile)
 
 If you're using Azure, the following are recommended configurations:
 * VM spec: `Standard_DC4s_v3`
-* OS spec: `Ubuntu Server 20.04 LTS - x64 Gen2`
+* OS spec: `Ubuntu Server 20.04 LTS` or `Ubuntu Server 22.04 LTS`
+
+
 
 ## Getting Started
 
@@ -29,9 +41,8 @@ $ cargo sgx run ../tests/GeneralStateTests/Cancun/*
 
 ## How it works
 
-In order to run revm in Intel SGX, we leverage the teaclave-sgx-sdk 2.0 implementation, mainly use its `cargo-std-aware` mode in cargo build and prevent modifying a lot of dependencies to compile them into no_std. See their [official docs](https://github.com/apache/incubator-teaclave-sgx-sdk/blob/v2.0.0-preview-11-17/README.md) to view more details.
+In order to run revm in Intel SGX, we leverage the automata-sgx-sdk implementation. See the [official docs](https://github.com/automata-network/automata-sgx-sdk) to view more details.
 
 To ensure successful compilation, other necessary adjustments include:
-* Fix the ctq inverse mod bug in blst when `__BLST_NO_CPUID__` is enabled, which is included in c-kzg dependency and affects the EIP4844 precompile instruction.
 * Use sgx_rand instead of the normal rand and getrandom crate, whose instructions are not compatible in SGX.
 * Ensure all cryptographic algorithms are compatible in SGX.
