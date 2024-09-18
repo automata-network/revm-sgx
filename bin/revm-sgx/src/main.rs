@@ -15,35 +15,17 @@
 // specific language governing permissions and limitations
 // under the License..
 
-use automata_sgx_builder::sgxlib::{sgx_types, sgx_urts};
+use automata_sgx_sdk::types::SgxStatus;
 
-use std::path::PathBuf;
-use sgx_types::error::SgxStatus;
-use sgx_types::types::*;
-use sgx_urts::enclave::SgxEnclave;
-
-static ENCLAVE_FILE: &str = "librevm_runner.signed.so";
-
-extern "C" {
-    fn run_server(eid: EnclaveId, retval: *mut SgxStatus) -> SgxStatus;
+automata_sgx_sdk::enclave! {
+    name: RevmRunner,
+    ecall: {
+        fn run_server() -> SgxStatus;
+    }
 }
 
 fn main() {
-    let args = std::env::args().collect::<Vec<_>>();
-    let enclave_path = PathBuf::new().join(&args[0]).parent().unwrap().join(ENCLAVE_FILE);
-    let enclave = match SgxEnclave::create(enclave_path, true) {
-        Ok(enclave) => {
-            println!("[+] Init Enclave Successful {}!", enclave.eid());
-            enclave
-        }
-        Err(err) => {
-            println!("[-] Init Enclave Failed {}!", err.as_str());
-            return;
-        }
-    };
-
-    let mut retval = SgxStatus::Success;
-    let result = unsafe { run_server(enclave.eid(), &mut retval) };
+    let result = RevmRunner::new().run_server().unwrap();
     match result {
         SgxStatus::Success => println!("[+] ECall Success..."),
         _ => println!("[-] ECall Enclave Failed {}!", result.as_str()),

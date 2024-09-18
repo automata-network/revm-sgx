@@ -15,8 +15,7 @@
 // specific language governing permissions and limitations
 // under the License..
 
-use automata_sgx_builder::sgxlib::sgx_types;
-use sgx_types::error::SgxStatus;
+use automata_sgx_sdk::types::SgxStatus;
 
 pub mod merkle_trie;
 pub mod models;

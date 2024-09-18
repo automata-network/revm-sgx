@@ -6,11 +6,14 @@ edition.workspace = true
 [package.metadata.sgx]
 revm_runner = { path = "../../crates/revm-runner", config = "sgx/revm-runner.xml", edl = "sgx/revm-runner.edl", lds = "sgx/revm-runner.lds", key = "sgx/private.pem" }
 
+[features]
+tstd_app = ["automata-sgx-sdk/tstd_app"]
+
 [dependencies]
 serde.workspace = true
 serde_json.workspace = true
-automata-sgx-builder = { workspace = true, features = ["sgx_types", "sgx_urts"] }
+automata-sgx-sdk.workspace = true
 
 
 [build-dependencies]
-automata-sgx-builder = { workspace = true, features = ["builder"] }
+automata-build-script.workspace = true

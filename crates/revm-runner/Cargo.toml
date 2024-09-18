@@ -8,13 +8,13 @@ name = "revm_runner"
 crate-type = ["staticlib"]
 
 [features]
-default = []
+tstd_enclave = ["automata-sgx-sdk/tstd_enclave"]
 
 [dependencies]
 blst.workspace = true
 serde.workspace = true
 serde_json.workspace = true
-automata-sgx-builder = { workspace = true, features = ["sgx_libc", "sgx_types"] }
+automata-sgx-sdk.workspace = true
 
 structopt = "0.3"
 thiserror = "1.0"

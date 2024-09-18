@@ -11,10 +11,11 @@ homepage = "https://www.ata.network/"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
-serde = { version = "=1.0.197", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1" }
-automata-sgx-builder = { git = "https://github.com/automata-network/automata-sgx-builder", branch = "main" }
-blst = { version = "=0.3.11" }
+automata-sgx-sdk = { git = "https://github.com/automata-network/automata-sgx-sdk", branch = "main" }
+automata-build-script = { git = "https://github.com/automata-network/automata-sgx-sdk", branch = "main" }
+blst = { version = "=0.3.13" }
 
 [patch.crates-io]
-blst = { git = "https://github.com/automata-network/blst", rev = "2ec67be" }
+blst = { git = "https://github.com/automata-network/blst", branch = "teaclave_2.0_v0.3.13" }
