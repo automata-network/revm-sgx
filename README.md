@@ -7,9 +7,9 @@
 </div>
 
 # revm-sgx
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE) [![Automata SGX SDK](https://img.shields.io/badge/Power%20By-Automata%20SGX%20SDK-orange.svg)](https://github.com/automata-network/automata-sgx-sdk)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE) [![Automata SGX SDK](https://img.shields.io/badge/Powered%20By-Automata%20SGX%20SDK-orange.svg)](https://github.com/automata-network/automata-sgx-sdk)
 
-This encalve app is the SGX version of the Rust EVM executor or short REVME. The official standard version can be found [here](https://github.com/bluealloy/revm/tree/main/bins/revme). Presently, its primary application is in executing Ethereum tests.
+This enclave app is the SGX version of the Rust EVM executor or short REVME. The official standard version can be found [here](https://github.com/bluealloy/revm/tree/main/bins/revme). Presently, its primary application is in executing Ethereum tests.
 
 ## Prerequisite
 * SGX-SDK 2.24 installation
@@ -25,7 +25,7 @@ If you're using Azure, the following are recommended configurations:
 
 ## Getting Started
 
-The encalve app takes a path to the directory where ethereum statetest json can be found. It recursively parses all json files in the specified directory and executes them.
+The enclave app takes a path to the directory where ethereum statetest json can be found. It recursively parses all json files in the specified directory and executes them.
 
 Running all [ethereum tests](https://github.com/ethereum/tests) checks that revm is compliant to the ethereum specs.
 
